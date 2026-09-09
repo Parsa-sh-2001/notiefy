@@ -1,0 +1,1445 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NotieFy — اعلان‌ها، ساده و سریع</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #080808;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            height: 76px;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 8%;
+
+            border-bottom: 1px solid #1b1b1b;
+
+            position: sticky;
+            top: 0;
+
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(15px);
+
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* جای لوگو */
+
+        .logo-placeholder {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            border: 1px dashed #444;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #666;
+            font-size: 10px;
+        }
+
+        .logo-text {
+            font-size: 23px;
+            font-weight: bold;
+            direction: ltr;
+        }
+
+        .logo-text span {
+            color: #7c5cff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            color: #999;
+
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            background: #151515;
+        }
+
+        .nav-login {
+            background: #7c5cff !important;
+            color: white !important;
+        }
+
+        .nav-login:hover {
+            background: #6948ff !important;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 760px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 100px 20px;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 650px;
+            height: 650px;
+
+            background: #7c5cff;
+
+            opacity: 0.12;
+
+            filter: blur(150px);
+
+            border-radius: 50%;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 900px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 9px 15px;
+
+            border: 1px solid #292929;
+
+            border-radius: 999px;
+
+            background: #101010;
+
+            color: #aaa;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 8vw, 90px);
+
+            line-height: 1.1;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 30px;
+        }
+
+        h1 span {
+            color: #7c5cff;
+        }
+
+        .hero-description {
+            max-width: 700px;
+
+            margin: auto;
+
+            color: #999;
+
+            font-size: 19px;
+
+            line-height: 2;
+
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+        }
+
+        .primary-btn {
+            background: #7c5cff;
+
+            color: white;
+
+            padding: 15px 27px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .primary-btn:hover {
+            background: #6948ff;
+
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: #151515;
+
+            color: white;
+
+            padding: 15px 27px;
+
+            border-radius: 10px;
+
+            border: 1px solid #292929;
+
+            transition: 0.2s;
+        }
+
+        .secondary-btn:hover {
+            background: #1d1d1d;
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           TRUST BAR
+        ========================= */
+
+        .trust {
+            border-top: 1px solid #171717;
+            border-bottom: 1px solid #171717;
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 14px;
+        }
+
+        .trust strong {
+            color: #aaa;
+        }
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
+
+        section {
+            padding: 110px 8%;
+        }
+
+        .section-heading {
+            text-align: center;
+
+            max-width: 700px;
+
+            margin: 0 auto 65px;
+        }
+
+        .section-heading h2 {
+            font-size: 45px;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 18px;
+        }
+
+        .section-heading p {
+            color: #888;
+
+            line-height: 2;
+
+            font-size: 17px;
+        }
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+            background: #0b0b0b;
+        }
+
+        .feature-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .feature {
+            background: #111;
+
+            border: 1px solid #202020;
+
+            border-radius: 16px;
+
+            padding: 30px;
+
+            transition: 0.25s;
+        }
+
+        .feature:hover {
+            transform: translateY(-6px);
+
+            border-color: #383838;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 21px;
+
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+            color: #858585;
+
+            line-height: 1.9;
+        }
+
+        /* =========================
+           LIBRARY + API
+        ========================= */
+
+        .developer-section {
+            background: #080808;
+        }
+
+        .developer-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px;
+        }
+
+        .developer-card {
+            background: #101010;
+
+            border: 1px solid #222;
+
+            border-radius: 18px;
+
+            padding: 40px;
+        }
+
+        .developer-card h3 {
+            font-size: 28px;
+
+            margin-bottom: 15px;
+        }
+
+        .developer-card p {
+            color: #888;
+
+            line-height: 2;
+
+            margin-bottom: 25px;
+        }
+
+        .code-box {
+            background: #070707;
+
+            border: 1px solid #252525;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            color: #aaa;
+
+            font-family: monospace;
+
+            font-size: 14px;
+
+            direction: ltr;
+
+            text-align: left;
+
+            overflow-x: auto;
+        }
+
+        .code-purple {
+            color: #9b86ff;
+        }
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .how {
+            background: #0b0b0b;
+        }
+
+        .steps {
+            max-width: 1000px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 30px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #151515;
+
+            border: 1px solid #303030;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #9b86ff;
+
+            font-weight: bold;
+
+            font-size: 20px;
+
+            direction: ltr;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #777;
+
+            line-height: 1.9;
+        }
+
+        /* =========================
+           PRICING
+        ========================= */
+
+        .pricing {
+            background: #080808;
+        }
+
+        .pricing-card {
+            max-width: 500px;
+
+            margin: auto;
+
+            padding: 40px;
+
+            background: #111;
+
+            border: 1px solid #343434;
+
+            border-radius: 20px;
+
+            position: relative;
+
+            box-shadow: 0 0 60px rgba(124, 92, 255, 0.08);
+        }
+
+        .discount {
+            position: absolute;
+
+            top: 20px;
+            left: 20px;
+
+            background: #7c5cff;
+
+            color: white;
+
+            padding: 7px 12px;
+
+            border-radius: 999px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .pricing-card h3 {
+            font-size: 25px;
+
+            margin-bottom: 8px;
+        }
+
+        .pricing-subtitle {
+            color: #777;
+
+            margin-bottom: 30px;
+
+            line-height: 1.8;
+        }
+
+        .old-price {
+            color: #666;
+
+            text-decoration: line-through;
+
+            font-size: 20px;
+
+            margin-bottom: 4px;
+        }
+
+        .price {
+            font-size: 45px;
+
+            font-weight: bold;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 5px;
+
+            direction: rtl;
+        }
+
+        .price span {
+            font-size: 16px;
+
+            color: #777;
+
+            font-weight: normal;
+        }
+
+        .price-note {
+            color: #777;
+
+            font-size: 13px;
+
+            margin-bottom: 30px;
+        }
+
+        .pricing-list {
+            list-style: none;
+
+            margin-bottom: 30px;
+        }
+
+        .pricing-list li {
+            padding: 11px 0;
+
+            border-bottom: 1px solid #1d1d1d;
+
+            color: #aaa;
+        }
+
+        .pricing-list li::before {
+            content: "✓";
+
+            color: #7c5cff;
+
+            margin-left: 10px;
+
+            font-weight: bold;
+        }
+
+        .pricing-button {
+            display: block;
+
+            text-align: center;
+
+            background: #7c5cff;
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .pricing-button:hover {
+            background: #6948ff;
+        }
+
+        /* =========================
+           FAQ
+        ========================= */
+
+        .faq {
+            background: #0b0b0b;
+        }
+
+        .faq-container {
+            max-width: 850px;
+
+            margin: auto;
+        }
+
+        details {
+            background: #111;
+
+            border: 1px solid #202020;
+
+            border-radius: 12px;
+
+            margin-bottom: 12px;
+
+            padding: 20px;
+        }
+
+        summary {
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        details p {
+            color: #888;
+
+            line-height: 1.9;
+
+            margin-top: 15px;
+        }
+
+        /* =========================
+           FINAL CTA
+        ========================= */
+
+        .cta {
+            text-align: center;
+
+            padding: 130px 20px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .cta h2 {
+            font-size: 50px;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 18px;
+        }
+
+        .cta p {
+            color: #888;
+
+            margin-bottom: 30px;
+
+            font-size: 17px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #191919;
+
+            padding: 35px 8%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            color: #555;
+
+            font-size: 14px;
+        }
+
+        footer span {
+            color: #777;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-links a:not(.nav-login) {
+                display: none;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            .feature-grid,
+            .developer-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .section-heading h2 {
+                font-size: 36px;
+            }
+
+            .cta h2 {
+                font-size: 38px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo-area">
+
+            <!-- جای لوگوی اصلی -->
+            <div class="logo-placeholder">
+                لوگو
+            </div>
+
+            <div class="logo-text">
+                Notie<span>Fy</span>
+            </div>
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="#features">
+                امکانات
+            </a>
+
+            <a href="#developers">
+                API
+            </a>
+
+            <a href="#pricing">
+                قیمت
+            </a>
+
+            <a href="#faq">
+                سوالات متداول
+            </a>
+
+            <a href="/en/">
+                English
+            </a>
+
+            <a href="login.html" class="nav-login">
+                ورود
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ⚡ زیرساخت اعلان، ساده و سریع
+            </div>
+
+
+            <h1>
+
+                اعلان ارسال کنید؛
+                <br>
+
+                <span>سیستمش را ما می‌سازیم.</span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                NotieFy به توسعه‌دهندگان امکان می‌دهد از طریق API
+                و کتابخانه اختصاصی، اعلان‌های خود را به‌سادگی ارسال کنند؛
+                بدون اینکه مجبور باشید سیستم اعلان را از صفر بسازید.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="login.html" class="primary-btn">
+                    شروع کنید ←
+                </a>
+
+                <a href="#how-it-works" class="secondary-btn">
+                    نحوه کار
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TRUST BAR
+    ========================= -->
+
+    <div class="trust">
+
+        ساخته شده برای توسعه‌دهندگانی که
+        <strong>اعلان ساده و بدون دردسر می‌خواهند.</strong>
+
+    </div>
+
+
+    <!-- =========================
+         FEATURES
+    ========================= -->
+
+    <section class="features" id="features">
+
+        <div class="section-heading">
+
+            <h2>
+                همه‌چیز برای شروع آماده است.
+            </h2>
+
+            <p>
+                NotieFy بخش اعلان برنامه شما را مدیریت می‌کند
+                تا شما بتوانید روی خود برنامه تمرکز کنید.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    ارسال سریع
+                </h3>
+
+                <p>
+                    اعلان‌های خود را با استفاده از یک سیستم
+                    ساده و مناسب توسعه‌دهندگان ارسال کنید.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📨
+                </div>
+
+                <h3>
+                    اعلان ایمیلی
+                </h3>
+
+                <p>
+                    ایمیل‌های زیبا و کاربردی را بدون ساختن
+                    زیرساخت ایمیل اختصاصی ارسال کنید.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    احراز هویت
+                </h3>
+
+                <p>
+                    با استفاده از API Key و سیستم احراز هویت،
+                    دسترسی به سرویس خود را کنترل کنید.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🧩
+                </div>
+
+                <h3>
+                    اتصال آسان
+                </h3>
+
+                <p>
+                    NotieFy را بدون نیاز به یادگیری یک
+                    SDK پیچیده به برنامه خود متصل کنید.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📚
+                </div>
+
+                <h3>
+                    کتابخانه NotieFy
+                </h3>
+
+                <p>
+                    با استفاده از کتابخانه NotieFy،
+                    ارسال اعلان را حتی ساده‌تر کنید.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    ساخته‌شده برای توسعه‌دهندگان
+                </h3>
+
+                <p>
+                    یک API ساده و قابل فهم که به شما اجازه می‌دهد
+                    در چند دقیقه شروع به کار کنید.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         API + LIBRARY
+    ========================= -->
+
+    <section class="developer-section" id="developers">
+
+        <div class="section-heading">
+
+            <h2>
+                برای توسعه‌دهندگان ساخته شده.
+            </h2>
+
+            <p>
+                مستقیماً از API استفاده کنید یا با کتابخانه NotieFy
+                اتصال برنامه خود را ساده‌تر کنید.
+            </p>
+
+        </div>
+
+
+        <div class="developer-grid">
+
+
+            <div class="developer-card">
+
+                <h3>
+                    🔌 API نوتیفای
+                </h3>
+
+                <p>
+                    برنامه شما از طریق یک API ساده با NotieFy ارتباط برقرار می‌کند.
+                    درخواست خود را ارسال کنید، اطلاعات لازم را وارد کنید
+                    و اجازه دهید NotieFy باقی کار را انجام دهد.
+                </p>
+
+
+                <div class="code-box">
+
+                    POST /<span class="code-purple">send</span>
+                    <br><br>
+
+                    {
+                    <br>
+
+                    &nbsp;&nbsp;"title": "New notification",
+                    <br>
+
+                    &nbsp;&nbsp;"message": "Something happened!"
+                    <br>
+
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div class="developer-card">
+
+                <h3>
+                    📚 کتابخانه NotieFy
+                </h3>
+
+                <p>
+                    اگر نمی‌خواهید درخواست‌های API را به‌صورت دستی مدیریت کنید،
+                    از کتابخانه NotieFy استفاده کنید و مستقیماً از داخل
+                    کد خود اعلان ارسال کنید.
+                </p>
+
+
+                <div class="code-box">
+
+                    <span class="code-purple">notiefy</span>.send(
+                    <br>
+
+                    &nbsp;&nbsp;title="Hello",
+                    <br>
+
+                    &nbsp;&nbsp;message="Your notification"
+                    <br>
+
+                    )
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================= -->
+
+    <section class="how" id="how-it-works">
+
+        <div class="section-heading">
+
+            <h2>
+                چطور کار می‌کند؟
+            </h2>
+
+            <p>
+                فقط سه مرحله.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    حساب خود را بسازید
+                </h3>
+
+                <p>
+                    حساب NotieFy خود را ایجاد کنید و
+                    به ابزارهای ارسال اعلان دسترسی پیدا کنید.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    برنامه خود را متصل کنید
+                </h3>
+
+                <p>
+                    با استفاده از API Key یا کتابخانه NotieFy،
+                    برنامه خود را به سرویس متصل کنید.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    اعلان ارسال کنید
+                </h3>
+
+                <p>
+                    برنامه شما درخواست را ارسال می‌کند
+                    و NotieFy باقی کار را انجام می‌دهد.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PRICING
+    ========================= -->
+
+    <section class="pricing" id="pricing">
+
+        <div class="section-heading">
+
+            <h2>
+                قیمت‌گذاری ساده.
+            </h2>
+
+            <p>
+                یک پلن ساده برای شروع کار با NotieFy.
+            </p>
+
+        </div>
+
+
+        <div class="pricing-card">
+
+
+            <div class="discount">
+                ۳۰٪ تخفیف
+            </div>
+
+
+            <h3>
+                NotieFy Starter
+            </h3>
+
+
+            <p class="pricing-subtitle">
+                همه چیزهایی که برای شروع ارسال اعلان نیاز دارید.
+            </p>
+
+
+            <div class="old-price">
+                ۵۰۱٬۸۰۰ تومان
+            </div>
+
+
+            <div class="price">
+                ۳۸۶٬۰۰۰ <span>تومان</span>
+            </div>
+
+
+            <div class="price-note">
+                قیمت ویژه شروع سرویس
+            </div>
+
+
+            <ul class="pricing-list">
+
+                <li>
+                    دسترسی به API نوتیفای
+                </li>
+
+                <li>
+                    کتابخانه NotieFy
+                </li>
+
+                <li>
+                    اعلان‌های ایمیلی
+                </li>
+
+                <li>
+                    احراز هویت API
+                </li>
+
+                <li>
+                    مستندات توسعه‌دهندگان
+                </li>
+
+                <li>
+                    کانال‌های اعلان آینده
+                </li>
+
+            </ul>
+
+
+            <a href="login.html" class="pricing-button">
+                دریافت NotieFy ←
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FAQ
+    ========================= -->
+
+    <section class="faq" id="faq">
+
+        <div class="section-heading">
+
+            <h2>
+                سوالات متداول
+            </h2>
+
+            <p>
+                چند سوالی که ممکن است برایتان پیش بیاید.
+            </p>
+
+        </div>
+
+
+        <div class="faq-container">
+
+
+            <details>
+
+                <summary>
+                    NotieFy چیست؟
+                </summary>
+
+                <p>
+                    NotieFy یک سرویس ارسال اعلان است که به برنامه‌ها
+                    اجازه می‌دهد از طریق API و کتابخانه توسعه‌دهندگان
+                    اعلان ارسال کنند.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    آیا باید سیستم اعلان خودم را بسازم؟
+                </summary>
+
+                <p>
+                    خیر. هدف NotieFy همین است.
+                    برنامه شما درخواست را به NotieFy ارسال می‌کند
+                    و NotieFy وظیفه ارسال اعلان را بر عهده می‌گیرد.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    چه روش‌هایی برای ارسال اعلان وجود دارد؟
+                </summary>
+
+                <p>
+                    در نسخه اولیه، اعلان‌های ایمیلی پشتیبانی می‌شوند
+                    و روش‌های ارسال بیشتری در آینده اضافه خواهند شد.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    آیا می‌توانم NotieFy را به برنامه خودم متصل کنم؟
+                </summary>
+
+                <p>
+                    بله. می‌توانید از API یا کتابخانه NotieFy
+                    برای اتصال برنامه خود استفاده کنید.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    آیا NotieFy API دارد؟
+                </summary>
+
+                <p>
+                    بله. NotieFy یک API برای ارتباط مستقیم
+                    برنامه شما با سرویس اعلان ارائه می‌دهد.
+                </p>
+
+            </details>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FINAL CTA
+    ========================= -->
+
+    <section class="cta">
+
+        <h2>
+            آماده ارسال اعلان هستید؟
+        </h2>
+
+        <p>
+            به‌جای ساختن زیرساخت اعلان، روی برنامه خود تمرکز کنید.
+        </p>
+
+        <a href="login.html" class="primary-btn">
+            شروع کار با NotieFy ←
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div>
+            © ۲۰۲۶ <span>NotieFy</span>
+        </div>
+
+        <div>
+            ساخته‌شده با Python و FastAPI
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
+```

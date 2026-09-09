@@ -1,0 +1,1349 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NotieFy — Simple Notifications</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #080808;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            height: 76px;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 8%;
+
+            border-bottom: 1px solid #1b1b1b;
+
+            position: sticky;
+            top: 0;
+
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(15px);
+
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /*
+            LOGO SPACE
+
+            Replace this div with:
+            <img src="logo.png" alt="NotieFy Logo">
+        */
+
+        .logo-placeholder {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            border: 1px dashed #444;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #666;
+            font-size: 12px;
+        }
+
+        .logo-text {
+            font-size: 23px;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .logo-text span {
+            color: #7c5cff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            color: #999;
+
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            background: #151515;
+        }
+
+        .nav-login {
+            background: #7c5cff !important;
+            color: white !important;
+        }
+
+        .nav-login:hover {
+            background: #6948ff !important;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 760px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 100px 20px;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 650px;
+            height: 650px;
+
+            background: #7c5cff;
+
+            opacity: 0.12;
+
+            filter: blur(150px);
+
+            border-radius: 50%;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 900px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 9px 15px;
+
+            border: 1px solid #292929;
+
+            border-radius: 999px;
+
+            background: #101010;
+
+            color: #aaa;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-size: clamp(55px, 8vw, 95px);
+
+            line-height: 0.95;
+
+            letter-spacing: -5px;
+
+            margin-bottom: 30px;
+        }
+
+        h1 span {
+            color: #7c5cff;
+        }
+
+        .hero-description {
+            max-width: 700px;
+
+            margin: auto;
+
+            color: #999;
+
+            font-size: 19px;
+
+            line-height: 1.7;
+
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+        }
+
+        .primary-btn {
+            background: #7c5cff;
+
+            color: white;
+
+            padding: 15px 27px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .primary-btn:hover {
+            background: #6948ff;
+
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: #151515;
+
+            color: white;
+
+            padding: 15px 27px;
+
+            border-radius: 10px;
+
+            border: 1px solid #292929;
+
+            transition: 0.2s;
+        }
+
+        .secondary-btn:hover {
+            background: #1d1d1d;
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           TRUST BAR
+        ========================= */
+
+        .trust {
+            border-top: 1px solid #171717;
+            border-bottom: 1px solid #171717;
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 14px;
+        }
+
+        .trust strong {
+            color: #aaa;
+        }
+
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
+
+        section {
+            padding: 110px 8%;
+        }
+
+        .section-heading {
+            text-align: center;
+
+            max-width: 700px;
+
+            margin: 0 auto 65px;
+        }
+
+        .section-heading h2 {
+            font-size: 45px;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 15px;
+        }
+
+        .section-heading p {
+            color: #888;
+
+            line-height: 1.6;
+
+            font-size: 17px;
+        }
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+            background: #0b0b0b;
+        }
+
+        .feature-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .feature {
+            background: #111;
+
+            border: 1px solid #202020;
+
+            border-radius: 16px;
+
+            padding: 30px;
+
+            transition: 0.25s;
+        }
+
+        .feature:hover {
+            transform: translateY(-6px);
+
+            border-color: #383838;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 21px;
+
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+            color: #858585;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           LIBRARY + API
+        ========================= */
+
+        .developer-section {
+            background: #080808;
+        }
+
+        .developer-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px;
+        }
+
+        .developer-card {
+            background: #101010;
+
+            border: 1px solid #222;
+
+            border-radius: 18px;
+
+            padding: 40px;
+        }
+
+        .developer-card h3 {
+            font-size: 28px;
+
+            margin-bottom: 15px;
+        }
+
+        .developer-card p {
+            color: #888;
+
+            line-height: 1.7;
+
+            margin-bottom: 25px;
+        }
+
+        .code-box {
+            background: #070707;
+
+            border: 1px solid #252525;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            color: #aaa;
+
+            font-family: monospace;
+
+            font-size: 14px;
+
+            overflow-x: auto;
+        }
+
+        .code-purple {
+            color: #9b86ff;
+        }
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .how {
+            background: #0b0b0b;
+        }
+
+        .steps {
+            max-width: 1000px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 30px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #151515;
+
+            border: 1px solid #303030;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #9b86ff;
+
+            font-weight: bold;
+
+            font-size: 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #777;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           PRICING
+        ========================= */
+
+        .pricing {
+            background: #080808;
+        }
+
+        .pricing-card {
+            max-width: 500px;
+
+            margin: auto;
+
+            padding: 40px;
+
+            background: #111;
+
+            border: 1px solid #343434;
+
+            border-radius: 20px;
+
+            position: relative;
+
+            box-shadow: 0 0 60px rgba(124, 92, 255, 0.08);
+        }
+
+        .discount {
+            position: absolute;
+
+            top: 20px;
+            right: 20px;
+
+            background: #7c5cff;
+
+            color: white;
+
+            padding: 7px 12px;
+
+            border-radius: 999px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .pricing-card h3 {
+            font-size: 25px;
+
+            margin-bottom: 8px;
+        }
+
+        .pricing-subtitle {
+            color: #777;
+
+            margin-bottom: 30px;
+        }
+
+        .old-price {
+            color: #666;
+
+            text-decoration: line-through;
+
+            font-size: 20px;
+
+            margin-bottom: 4px;
+        }
+
+        .price {
+            font-size: 48px;
+
+            font-weight: bold;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 5px;
+        }
+
+        .price span {
+            font-size: 16px;
+
+            color: #777;
+
+            font-weight: normal;
+        }
+
+        .price-note {
+            color: #777;
+
+            font-size: 13px;
+
+            margin-bottom: 30px;
+        }
+
+        .pricing-list {
+            list-style: none;
+
+            margin-bottom: 30px;
+        }
+
+        .pricing-list li {
+            padding: 11px 0;
+
+            border-bottom: 1px solid #1d1d1d;
+
+            color: #aaa;
+        }
+
+        .pricing-list li::before {
+            content: "✓";
+
+            color: #7c5cff;
+
+            margin-right: 10px;
+
+            font-weight: bold;
+        }
+
+        .pricing-button {
+            display: block;
+
+            text-align: center;
+
+            background: #7c5cff;
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .pricing-button:hover {
+            background: #6948ff;
+        }
+
+        /* =========================
+           FAQ
+        ========================= */
+
+        .faq {
+            background: #0b0b0b;
+        }
+
+        .faq-container {
+            max-width: 850px;
+
+            margin: auto;
+        }
+
+        details {
+            background: #111;
+
+            border: 1px solid #202020;
+
+            border-radius: 12px;
+
+            margin-bottom: 12px;
+
+            padding: 20px;
+        }
+
+        summary {
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        details p {
+            color: #888;
+
+            line-height: 1.6;
+
+            margin-top: 15px;
+        }
+
+        /* =========================
+           FINAL CTA
+        ========================= */
+
+        .cta {
+            text-align: center;
+
+            padding: 130px 20px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .cta h2 {
+            font-size: 50px;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 18px;
+        }
+
+        .cta p {
+            color: #888;
+
+            margin-bottom: 30px;
+
+            font-size: 17px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #191919;
+
+            padding: 35px 8%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            color: #555;
+
+            font-size: 14px;
+        }
+
+        footer span {
+            color: #777;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-links a:not(.nav-login) {
+                display: none;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            .feature-grid,
+            .developer-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .section-heading h2 {
+                font-size: 36px;
+            }
+
+            .cta h2 {
+                font-size: 38px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo-area">
+
+            <!-- LOGO SPACE -->
+            <div class="logo-placeholder">
+                LOGO
+            </div>
+
+            <div class="logo-text">
+                Notie<span>Fy</span>
+            </div>
+
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#features">Features</a>
+
+            <a href="#developers">API</a>
+
+            <a href="#pricing">Pricing</a>
+
+            <a href="#faq">FAQ</a>
+
+            <a href="/fa/">فارسی</a>
+
+            <a href="login.html" class="nav-login">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ⚡ Notification infrastructure, simplified
+            </div>
+
+            <h1>
+                Send notifications.<br>
+                <span>Don't build the system.</span>
+            </h1>
+
+            <p class="hero-description">
+                NotieFy gives developers a simple way to send notifications
+                through an API and library, so you can focus on your application
+                instead of building notification infrastructure from scratch.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="login.html" class="primary-btn">
+                    Get Started →
+                </a>
+
+                <a href="#how-it-works" class="secondary-btn">
+                    See How It Works
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TRUST BAR
+    ========================= -->
+
+    <div class="trust">
+
+        Built for developers who want
+        <strong>notifications without the headache.</strong>
+
+    </div>
+
+
+    <!-- =========================
+         FEATURES
+    ========================= -->
+
+    <section class="features" id="features">
+
+        <div class="section-heading">
+
+            <h2>
+                Everything you need.
+            </h2>
+
+            <p>
+                NotieFy handles the notification layer while you
+                concentrate on building your actual product.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature">
+
+                <div class="feature-icon">⚡</div>
+
+                <h3>Fast Delivery</h3>
+
+                <p>
+                    Send notifications quickly through a simple
+                    interface designed for developers.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">📨</div>
+
+                <h3>Email Notifications</h3>
+
+                <p>
+                    Send beautifully formatted email notifications
+                    without building your own email infrastructure.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">🔐</div>
+
+                <h3>Authentication</h3>
+
+                <p>
+                    Keep your notification system protected with
+                    API keys and authenticated requests.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">🧩</div>
+
+                <h3>Simple Integration</h3>
+
+                <p>
+                    Integrate NotieFy into your application without
+                    learning an enormous SDK.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">📚</div>
+
+                <h3>NotieFy Library</h3>
+
+                <p>
+                    Use the NotieFy library to make sending
+                    notifications even easier from your code.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">🚀</div>
+
+                <h3>Developer First</h3>
+
+                <p>
+                    Built around a straightforward API so you can
+                    start sending notifications in minutes.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         API + LIBRARY
+    ========================= -->
+
+    <section class="developer-section" id="developers">
+
+        <div class="section-heading">
+
+            <h2>
+                Built for developers.
+            </h2>
+
+            <p>
+                Use the API directly or use the NotieFy library
+                to make integration even simpler.
+            </p>
+
+        </div>
+
+
+        <div class="developer-grid">
+
+            <div class="developer-card">
+
+                <h3>🔌 NotieFy API</h3>
+
+                <p>
+                    Your application communicates with NotieFy
+                    through a simple HTTP API. Send a request,
+                    provide your credentials, and let NotieFy
+                    handle the notification.
+                </p>
+
+                <div class="code-box">
+                    POST /<span class="code-purple">send</span><br><br>
+
+                    {<br>
+                    &nbsp;&nbsp;"title": "New notification",<br>
+                    &nbsp;&nbsp;"message": "Something happened!"<br>
+                    }
+                </div>
+
+            </div>
+
+
+            <div class="developer-card">
+
+                <h3>📚 NotieFy Library</h3>
+
+                <p>
+                    Don't want to manually handle API requests?
+                    Use the NotieFy library and interact with
+                    the service directly from your application.
+                </p>
+
+                <div class="code-box">
+                    <span class="code-purple">notiefy</span>.send(<br>
+                    &nbsp;&nbsp;title="Hello",<br>
+                    &nbsp;&nbsp;message="Your notification"<br>
+                    )
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================= -->
+
+    <section class="how" id="how-it-works">
+
+        <div class="section-heading">
+
+            <h2>
+                How it works.
+            </h2>
+
+            <p>
+                Three steps. That's it.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>Create your account</h3>
+
+                <p>
+                    Create your NotieFy account and get access
+                    to your notification tools.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>Connect your app</h3>
+
+                <p>
+                    Use your API key or the NotieFy library
+                    to connect your application.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>Send notifications</h3>
+
+                <p>
+                    Your application sends the request.
+                    NotieFy takes care of the rest.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PRICING
+    ========================= -->
+
+    <section class="pricing" id="pricing">
+
+        <div class="section-heading">
+
+            <h2>
+                Simple pricing.
+            </h2>
+
+            <p>
+                One straightforward plan for getting started
+                with NotieFy.
+            </p>
+
+        </div>
+
+
+        <div class="pricing-card">
+
+            <div class="discount">
+                30% OFF
+            </div>
+
+            <h3>
+                NotieFy Starter
+            </h3>
+
+            <p class="pricing-subtitle">
+                Everything you need to start sending notifications.
+            </p>
+
+
+            <div class="old-price">
+                501,800 تومان
+            </div>
+
+            <div class="price">
+                386,000 <span>تومان</span>
+            </div>
+
+            <div class="price-note">
+                Limited-time launch pricing
+            </div>
+
+
+            <ul class="pricing-list">
+
+                <li>
+                    NotieFy API access
+                </li>
+
+                <li>
+                    NotieFy Library
+                </li>
+
+                <li>
+                    Email notifications
+                </li>
+
+                <li>
+                    API authentication
+                </li>
+
+                <li>
+                    Developer documentation
+                </li>
+
+                <li>
+                    Future notification channels
+                </li>
+
+            </ul>
+
+
+            <a href="login.html" class="pricing-button">
+                Get NotieFy →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FAQ
+    ========================= -->
+
+    <section class="faq" id="faq">
+
+        <div class="section-heading">
+
+            <h2>
+                Frequently asked questions.
+            </h2>
+
+            <p>
+                A few things you might want to know.
+            </p>
+
+        </div>
+
+
+        <div class="faq-container">
+
+            <details>
+
+                <summary>
+                    What is NotieFy?
+                </summary>
+
+                <p>
+                    NotieFy is a notification service that allows
+                    applications to send notifications through an API
+                    and developer library.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    Do I need to build my own notification system?
+                </summary>
+
+                <p>
+                    Nope. That's the point. Your application sends
+                    a request to NotieFy and NotieFy handles the
+                    notification delivery.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    What notification methods are supported?
+                </summary>
+
+                <p>
+                    Email notifications are supported initially,
+                    with additional notification channels planned
+                    for the future.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    Can I use NotieFy with my own application?
+                </summary>
+
+                <p>
+                    Yes. You can integrate NotieFy using the API
+                    or the NotieFy library.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    Is there an API?
+                </summary>
+
+                <p>
+                    Yes. NotieFy provides an API specifically
+                    designed for application-to-NotieFy communication.
+                </p>
+
+            </details>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FINAL CTA
+    ========================= -->
+
+    <section class="cta">
+
+        <h2>
+            Ready to notify?
+        </h2>
+
+        <p>
+            Stop building notification infrastructure.
+            Start building your application.
+        </p>
+
+        <a href="login.html" class="primary-btn">
+            Get Started with NotieFy →
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div>
+            © 2026 <span>NotieFy</span>
+        </div>
+
+        <div>
+            Built with Python & FastAPI.
+        </div>
+
+    </footer>
+
+
+</body>
+</html>
+```

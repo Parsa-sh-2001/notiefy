@@ -1,0 +1,1446 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NotieFy — ورود</title>
+
+    <link rel="icon" type="image/jpeg" href="/assets/logo-notiefy.jpeg">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #070707;
+            --panel: #0d0d0f;
+            --panel-soft: #101012;
+
+            --border: #242428;
+            --border-hover: #36363d;
+
+            --text: #f5f5f7;
+            --muted: #898991;
+            --muted-2: #66666e;
+
+            --purple: #8067ff;
+            --purple-light: #927cff;
+
+            --success: #65e69a;
+            --danger: #ff6f7d;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(128, 103, 255, 0.10),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 85%,
+                    rgba(128, 103, 255, 0.06),
+                    transparent 30%
+                ),
+                var(--bg);
+
+            color: var(--text);
+
+            font-family:
+                "Vazirmatn",
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           BACKGROUND GRID
+        ========================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: 0.22;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 45px 45px;
+
+            mask-image:
+                radial-gradient(
+                    circle at center,
+                    black,
+                    transparent 75%
+                );
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+
+            width: min(1080px, 100%);
+
+            min-height: 640px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 0.92fr;
+
+            background: rgba(13, 13, 15, 0.94);
+
+            border: 1px solid var(--border);
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 100px rgba(0, 0, 0, 0.55),
+                0 0 100px rgba(128, 103, 255, 0.07);
+
+            position: relative;
+
+            z-index: 1;
+        }
+
+
+        /* =========================
+           SLIDER
+        ========================= */
+
+        .slider {
+
+            position: relative;
+
+            padding: 70px;
+
+            display: flex;
+            align-items: center;
+
+            background:
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(128, 103, 255, 0.15),
+                    transparent 48%
+                ),
+                linear-gradient(
+                    145deg,
+                    #111115,
+                    #0b0b0d
+                );
+
+            border-left: 1px solid var(--border);
+
+            overflow: hidden;
+        }
+
+
+        .slider::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            top: -120px;
+            left: -100px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(128, 103, 255, 0.10);
+
+            box-shadow:
+                0 0 0 45px rgba(128, 103, 255, 0.025),
+                0 0 0 90px rgba(128, 103, 255, 0.015);
+
+            pointer-events: none;
+        }
+
+
+        .slider-content {
+
+            position: relative;
+
+            width: 100%;
+
+            z-index: 2;
+        }
+
+
+        .brand-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 8px 12px;
+
+            margin-bottom: 34px;
+
+            border-radius: 100px;
+
+            background: rgba(255,255,255,0.035);
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            color: #bcbcc5;
+
+            font-size: 13px;
+
+            font-weight: 500;
+        }
+
+
+        .brand-dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--purple);
+
+            box-shadow:
+                0 0 12px rgba(128, 103, 255, 0.8);
+        }
+
+
+        .slide {
+
+            display: none;
+
+            animation: slideIn 0.45s ease;
+        }
+
+
+        .slide.active {
+
+            display: block;
+        }
+
+
+        @keyframes slideIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        .slide-icon {
+
+            width: 68px;
+            height: 68px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            margin-bottom: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(128,103,255,0.20),
+                    rgba(128,103,255,0.06)
+                );
+
+            border: 1px solid rgba(128,103,255,0.20);
+
+            font-size: 30px;
+
+            box-shadow:
+                0 15px 45px rgba(128,103,255,0.08);
+        }
+
+
+        .slide h1 {
+
+            max-width: 500px;
+
+            font-size: clamp(30px, 3vw, 42px);
+
+            line-height: 1.35;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .slide p {
+
+            max-width: 440px;
+
+            color: var(--muted);
+
+            font-size: 16px;
+
+            line-height: 2;
+
+            font-weight: 400;
+        }
+
+
+        /* =========================
+           SLIDER CONTROLS
+        ========================= */
+
+        .slider-controls {
+
+            position: absolute;
+
+            bottom: 38px;
+
+            right: 70px;
+            left: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .arrows {
+
+            display: flex;
+
+            gap: 8px;
+        }
+
+
+        .arrow {
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border);
+
+            background: rgba(255,255,255,0.025);
+
+            color: #aaaab2;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition:
+                border-color 0.2s,
+                color 0.2s,
+                background 0.2s,
+                transform 0.2s;
+        }
+
+
+        .arrow:hover {
+
+            border-color: rgba(128,103,255,0.5);
+
+            color: white;
+
+            background: rgba(128,103,255,0.08);
+
+            transform: translateY(-1px);
+        }
+
+
+        .dots {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+        }
+
+
+        .dot {
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 20px;
+
+            background: #34343a;
+
+            transition: 0.25s;
+        }
+
+
+        .dot.active {
+
+            width: 24px;
+
+            background: var(--purple);
+
+            box-shadow:
+                0 0 12px rgba(128,103,255,0.45);
+        }
+
+
+        /* =========================
+           LOGIN SECTION
+        ========================= */
+
+        .login-section {
+
+            padding: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: var(--panel);
+        }
+
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 390px;
+        }
+
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo-wrapper {
+
+            width: 58px;
+            height: 58px;
+
+            padding: 5px;
+
+            margin-bottom: 26px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(128,103,255,0.18),
+                    rgba(255,255,255,0.025)
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,0.25);
+        }
+
+
+        .logo {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            border-radius: 12px;
+        }
+
+
+        /* =========================
+           LOGIN HEADER
+        ========================= */
+
+        .login-card h2 {
+
+            font-size: 31px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.6px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .subtitle {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+            margin-bottom: 32px;
+        }
+
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        .input-group {
+
+            margin-bottom: 18px;
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            color: #c5c5cb;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 9px;
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            top: 50%;
+
+            right: 15px;
+
+            transform: translateY(-50%);
+
+            color: #66666e;
+
+            font-size: 17px;
+
+            pointer-events: none;
+
+            transition: color 0.2s;
+        }
+
+
+        .input-wrapper:focus-within .input-icon {
+
+            color: var(--purple-light);
+        }
+
+
+        .input-group input {
+
+            width: 100%;
+
+            height: 52px;
+
+            padding:
+                0 45px
+                0 15px;
+
+            border-radius: 13px;
+
+            border: 1px solid #27272c;
+
+            background: #111113;
+
+            color: #fff;
+
+            outline: none;
+
+            font-family:
+                "Vazirmatn",
+                Tahoma,
+                sans-serif;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s,
+                background 0.2s;
+        }
+
+
+        .input-group input::placeholder {
+
+            color: #55555d;
+        }
+
+
+        .input-group input:hover {
+
+            border-color: var(--border-hover);
+        }
+
+
+        .input-group input:focus {
+
+            background: #121215;
+
+            border-color: rgba(128,103,255,0.65);
+
+            box-shadow:
+                0 0 0 4px rgba(128,103,255,0.08);
+        }
+
+
+        /* Keep credentials visually LTR */
+
+        #username,
+        #password {
+
+            direction: ltr;
+
+            text-align: left;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .login-btn {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 8px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8067ff,
+                    #7057ee
+                );
+
+            color: white;
+
+            font-family:
+                "Vazirmatn",
+                Tahoma,
+                sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s,
+                opacity 0.2s;
+        }
+
+
+        .login-btn::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    transparent 20%,
+                    rgba(255,255,255,0.13),
+                    transparent 80%
+                );
+
+            transform: translateX(-100%);
+
+            transition: transform 0.55s;
+        }
+
+
+        .login-btn:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 12px 30px rgba(128,103,255,0.22);
+        }
+
+
+        .login-btn:hover::before {
+
+            transform: translateX(100%);
+        }
+
+
+        .login-btn:active {
+
+            transform: translateY(0);
+        }
+
+
+        .login-btn:disabled {
+
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        #status {
+
+            min-height: 22px;
+
+            margin-top: 17px;
+
+            padding: 0 3px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================
+           BACK LINK
+        ========================= */
+
+        .back {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-top: 27px;
+
+            color: #66666e;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: color 0.2s;
+        }
+
+
+        .back:hover {
+
+            color: #bcbcc4;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .security-note {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 28px;
+
+            color: #4f4f57;
+
+            font-size: 11px;
+        }
+
+
+        .security-note span {
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            body {
+
+                padding: 18px;
+
+                overflow: auto;
+            }
+
+
+            .container {
+
+                grid-template-columns: 1fr;
+
+                min-height: auto;
+
+                max-width: 500px;
+
+                border-radius: 24px;
+            }
+
+
+            .slider {
+
+                min-height: 340px;
+
+                padding: 45px 38px 90px;
+
+                border-left: none;
+
+                border-bottom: 1px solid var(--border);
+            }
+
+
+            .slider-controls {
+
+                right: 38px;
+
+                left: 38px;
+
+                bottom: 28px;
+            }
+
+
+            .slide h1 {
+
+                font-size: 30px;
+            }
+
+
+            .slide p {
+
+                font-size: 14px;
+            }
+
+
+            .login-section {
+
+                padding: 48px 38px;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            body {
+
+                padding: 0;
+            }
+
+
+            .container {
+
+                min-height: 100vh;
+
+                border: none;
+
+                border-radius: 0;
+            }
+
+
+            .slider {
+
+                min-height: 315px;
+
+                padding: 38px 25px 85px;
+            }
+
+
+            .slider-controls {
+
+                right: 25px;
+
+                left: 25px;
+            }
+
+
+            .login-section {
+
+                padding: 45px 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         PRODUCT SIDE
+    ========================= -->
+
+    <section class="slider">
+
+        <div class="slider-content">
+
+            <div class="brand-badge">
+                <span class="brand-dot"></span>
+                NotieFy
+            </div>
+
+
+            <!-- SLIDE 1 -->
+
+            <div class="slide active">
+
+                <div class="slide-icon">
+                    📨
+                </div>
+
+                <h1>
+                    اعلان‌ها،
+                    ساده‌تر از همیشه.
+                </h1>
+
+                <p>
+                    اعلان‌های خود را سریع، ساده و قابل اعتماد
+                    ارسال کنید؛ بدون ساختن یک سیستم پیچیده.
+                </p>
+
+            </div>
+
+
+            <!-- SLIDE 2 -->
+
+            <div class="slide">
+
+                <div class="slide-icon">
+                    ⚡
+                </div>
+
+                <h1>
+                    یک API.
+                    یکپارچه‌سازی ساده.
+                </h1>
+
+                <p>
+                    NotieFy را به برنامه خود متصل کنید
+                    و ارسال اعلان‌ها را به سیستم ما بسپارید.
+                </p>
+
+            </div>
+
+
+            <!-- SLIDE 3 -->
+
+            <div class="slide">
+
+                <div class="slide-icon">
+                    🔐
+                </div>
+
+                <h1>
+                    امنیت،
+                    از ابتدا.
+                </h1>
+
+                <p>
+                    احراز هویت امن برای محافظت از حساب،
+                    درخواست‌ها و اطلاعات شما.
+                </p>
+
+            </div>
+
+
+            <!-- SLIDE 4 -->
+
+            <div class="slide">
+
+                <div class="slide-icon">
+                    🚀
+                </div>
+
+                <h1>
+                    برنامه‌ات را بساز.
+                    اعلان‌ها با ما.
+                </h1>
+
+                <p>
+                    روی محصول خودت تمرکز کن و ارسال
+                    اعلان‌ها را به NotieFy بسپار.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTROLS -->
+
+        <div class="slider-controls">
+
+            <div class="arrows">
+
+                <button
+                    class="arrow"
+                    onclick="changeSlide(-1)"
+                    aria-label="اسلاید قبلی"
+                >
+                    →
+                </button>
+
+                <button
+                    class="arrow"
+                    onclick="changeSlide(1)"
+                    aria-label="اسلاید بعدی"
+                >
+                    ←
+                </button>
+
+            </div>
+
+
+            <div class="dots">
+
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LOGIN
+    ========================= -->
+
+    <section class="login-section">
+
+        <div class="login-card">
+
+
+            <!-- LOGO -->
+
+            <div class="logo-wrapper">
+
+                <img
+                    src="/assets/notiefy-logo.png"
+                    class="logo"
+                    alt="NotieFy"
+                >
+
+            </div>
+
+
+            <!-- HEADER -->
+
+            <h2>
+                خوش آمدید
+            </h2>
+
+            <p class="subtitle">
+                برای ورود به حساب NotieFy،
+                اطلاعات خود را وارد کنید.
+            </p>
+
+
+            <!-- FORM -->
+
+            <form id="loginForm">
+
+
+                <!-- USERNAME -->
+
+                <div class="input-group">
+
+                    <label for="username">
+                        نام کاربری
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ◉
+                        </span>
+
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="نام کاربری"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="password">
+                        رمز عبور
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ◈
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="رمز عبور"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                    id="loginButton"
+                >
+                    ورود به حساب
+                </button>
+
+            </form>
+
+
+            <!-- STATUS -->
+
+            <div id="status"></div>
+
+
+            <!-- BACK -->
+
+            <a
+                href="index.html"
+                class="back"
+            >
+                <span>→</span>
+                بازگشت به صفحه اصلی
+            </a>
+
+
+            <!-- SECURITY -->
+
+            <div class="security-note">
+                <span>🔒</span>
+                اتصال امن به سرور NotieFy
+            </div>
+
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+
+    /* =========================
+       SLIDER
+    ========================= */
+
+    let currentSlide = 0;
+
+    const slides =
+        document.querySelectorAll(".slide");
+
+    const dots =
+        document.querySelectorAll(".dot");
+
+
+    function showSlide(index) {
+
+        if (index >= slides.length) {
+            currentSlide = 0;
+        }
+
+        if (index < 0) {
+            currentSlide = slides.length - 1;
+        }
+
+
+        slides.forEach(slide => {
+
+            slide.classList.remove("active");
+
+        });
+
+
+        dots.forEach(dot => {
+
+            dot.classList.remove("active");
+
+        });
+
+
+        slides[currentSlide]
+            .classList.add("active");
+
+        dots[currentSlide]
+            .classList.add("active");
+
+    }
+
+
+    function changeSlide(direction) {
+
+        currentSlide += direction;
+
+        showSlide(currentSlide);
+
+    }
+
+
+    setInterval(() => {
+
+        currentSlide++;
+
+        showSlide(currentSlide);
+
+    }, 5500);
+
+
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    const form =
+        document.getElementById("loginForm");
+
+    const status =
+        document.getElementById("status");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+
+    form.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+
+            const username =
+                document
+                    .getElementById("username")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+
+            status.textContent =
+                "در حال ورود...";
+
+            status.style.color =
+                "#898991";
+
+
+            loginButton.disabled = true;
+
+            loginButton.textContent =
+                "در حال بررسی...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "https://notie-fy-fastapi5.onrender.com/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                username: username,
+                                password: password
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (response.ok) {
+
+                    status.textContent =
+                        "✓ ورود با موفقیت انجام شد!";
+
+                    status.style.color =
+                        "#65e69a";
+
+                }
+
+                else {
+
+                    status.textContent =
+                        data.detail ||
+                        "نام کاربری یا رمز عبور اشتباه است.";
+
+                    status.style.color =
+                        "#ff6f7d";
+
+                }
+
+
+            }
+
+            catch (error) {
+
+                status.textContent =
+                    "اتصال به سرور برقرار نشد.";
+
+                status.style.color =
+                    "#ff6f7d";
+
+            }
+
+
+            finally {
+
+                loginButton.disabled = false;
+
+                loginButton.textContent =
+                    "ورود به حساب";
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
+```
